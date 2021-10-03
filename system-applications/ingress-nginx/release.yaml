@@ -23,4 +23,3 @@ spec:
       service:
         annotations:
           "metallb.universe.tf/address-pool": "ingress-gateway"
-          "external-dns.alpha.kubernetes.io/hostname": "ingress-gateway.busetti.io."
