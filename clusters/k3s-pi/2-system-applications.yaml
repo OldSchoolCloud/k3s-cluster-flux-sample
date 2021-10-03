@@ -1,0 +1,16 @@
+# System applications dependent on Infrastructure (ingress, external dns, etc.)
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: system-applications
+  namespace: flux-system
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./system-applications
+  prune: true
+  validation: client
+  dependsOn:
+    - name: infrastructure

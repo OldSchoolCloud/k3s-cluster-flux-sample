@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - git-repository-system-upgrade-controller.yaml
+  - helm-repository-consul.yml
+  - helm-repository-coredns.yml
+  - helm-repository-ingress-nginx.yml
+  - helm-repository-jetstack.yml
+  - helm-repository-metallb.yaml
+  - helm-repository-nfs-subdir-external-provisioner.yaml
+  - helm-repository-purelb.yaml
+  - helm-repository-stable.yml
+  - helm-repository-twuni.yml

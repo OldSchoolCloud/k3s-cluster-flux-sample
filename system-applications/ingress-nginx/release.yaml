@@ -1,0 +1,26 @@
+# Chart docs: https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+spec:
+  releaseName: ingress-nginx
+  chart:
+    spec:
+      chart: ingress-nginx
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+        namespace: flux-system
+      version: "4.0.1"
+  interval: 30m
+  install:
+    remediation:
+      retries: 3
+  values:
+    controller:
+      watchIngressWithoutClass: true
+      service:
+        annotations:
+          "metallb.universe.tf/address-pool": "ingress-gateway"
+          "external-dns.alpha.kubernetes.io/hostname": "ingress-gateway.busetti.io."

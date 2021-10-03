@@ -1,0 +1,5 @@
+# System applications dependent on Infrastructure (ingress, external dns, etc.)
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ingress-nginx

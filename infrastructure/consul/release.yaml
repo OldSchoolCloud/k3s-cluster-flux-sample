@@ -1,0 +1,84 @@
+# https://www.consul.io/docs/k8s/helm#helm-chart-configuration
+# https://github.com/hashicorp/consul-k8s/blob/main/charts/consul/values.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: consul
+spec:
+  releaseName: consul
+  chart:
+    spec:
+      chart: consul
+      sourceRef:
+        kind: HelmRepository
+        name: hashicorp
+        namespace: flux-system
+      version: "0.34.1"
+  interval: 30m
+  install:
+    remediation:
+      retries: 3
+  values:
+    global:
+      enabled: true
+      logLevel: "error"
+      metrics:
+        enabled: false
+      tls:
+        enabled: false
+      gossipEncryption:
+        secretName: consul-gossip-encryption-key
+        secretKey: key
+    server:
+      enabled: true
+      replicas: 3
+      bootstrapExpect: 5
+      exposeGossipAndRPCPorts: true
+      ports:
+        serflan:
+          port: 9301
+      connect: false
+      nodeSelector:  |
+        "node-role.kubernetes.io/master": "true"
+    client:
+      enabled: true
+      exposeGossipPorts: true
+      updateStrategy: |
+        rollingUpdate:
+          maxUnavailable: 1
+        type: RollingUpdate
+    dns:
+      enabled: false
+    ui:
+      enabled: false
+      service:
+        enabled: false
+        type: ClusterIP
+      ingress:
+        enabled: false
+        hosts: []
+        tls: []
+        annotations: null
+    syncCatalog:
+      enabled: true
+      default: true
+      toK8S: true
+      k8sPrefix: "consul-"
+      toConsul: true
+      consulPrefix: "k3s-"
+      k8sTag: k3s
+      syncClusterIPServices: false
+    connectInject:
+      enabled: false
+    controller:
+      enabled: false
+    meshGateway:
+      enabled: false
+    ingressGateways:
+      enabled: false
+    terminatingGateways:
+      enabled: false
+    prometheus:
+      enabled: false
+    tests:
+      enabled: false
