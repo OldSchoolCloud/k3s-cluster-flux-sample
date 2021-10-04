@@ -37,7 +37,7 @@ spec:
       ports:
         serflan:
           port: 9301
-      connect: false
+      connect: true
       nodeSelector:  |
         "node-role.kubernetes.io/master": "true"
     client:
@@ -71,7 +71,7 @@ spec:
     connectInject:
       enabled: false
     controller:
-      enabled: false
+      enabled: true
     meshGateway:
       enabled: false
     ingressGateways:
