@@ -50,10 +50,10 @@ spec:
     dns:
       enabled: false
     ui:
-      enabled: false
+      enabled: true
       service:
-        enabled: false
-        type: ClusterIP
+        enabled: true
+        type: LoadBalancer
       ingress:
         enabled: false
         hosts: []
