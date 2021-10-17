@@ -6,9 +6,4 @@ resources:
   - helm-repository-consul.yml
   - helm-repository-coredns.yml
   - helm-repository-ingress-nginx.yml
-  - helm-repository-jetstack.yml
   - helm-repository-metallb.yaml
-  - helm-repository-nfs-subdir-external-provisioner.yaml
-  - helm-repository-purelb.yaml
-  - helm-repository-stable.yml
-  - helm-repository-twuni.yml
