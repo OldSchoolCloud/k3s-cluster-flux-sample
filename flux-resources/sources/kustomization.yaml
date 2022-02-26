@@ -3,7 +3,5 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - git-repository-system-upgrade-controller.yaml
-  - helm-repository-consul.yml
   - helm-repository-coredns.yml
   - helm-repository-ingress-nginx.yml
-  - helm-repository-metallb.yaml
